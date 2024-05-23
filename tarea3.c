@@ -5,6 +5,7 @@
 #include "tdas/extra.h"
 #include <string.h>
 
+
 // Definición de la estructura para el estado del puzzle
 typedef struct {
     int square[3][3]; // Matriz 3x3 que representa el tablero
@@ -13,7 +14,15 @@ typedef struct {
     List* actions; //Secuencia de movimientos para llegar al estado
 } State;
 
-int distancia_L1(State* state) {
+// Definicion de estructura del nodo
+typedef struct
+{
+    State state;  //estado del puzzle
+    int coste;    //coste del estado    
+} Node;
+
+
+int distancia_L1(State* state) {  //la ocuparemos para calcular el coste
     int ev=0;
     int k=1;
     for(int i=0;i<3;i++)
@@ -41,6 +50,12 @@ void imprimirEstado(const State *estado) {
     }
 }
 
+
+// Obtener los nodos adyacentes del estado actual
+List* get_adyacent_node(State* state)
+{
+    
+}
 
 int main() {
     // Estado inicial del puzzle
