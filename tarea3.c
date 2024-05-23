@@ -51,15 +51,32 @@ void imprimirEstado(const State *estado) {
 }
 
 
+//
+
 // Funcion para obtener los nuevos estados posibles a partir del estado actual.
 State* transition(State* state, int action)
 {
     int dx[] = {0, 0, -1, 1};     //filas -> se puede mover a la derecha(+1) o izquierda(-1)
     int dy[] = {-1, 1, 0, 0};     //columnas -> se puede mover hacia arriba(-1) o hacia abajo(1)
-    int new_x = state -> x + dx[action -1];
+    int new_x = state -> x + dx[action -1];   //obtener para donde se tiene que mover.
     int new_y = state -> y + dy[action -1];
+
+    if ((new_x >= 0 && new_x < 3) && (new_y >= 0 && new_y < 3)) //si la posición es valida.
+    {
+        State* new_state = (State*) malloc(sizeof(State));
+        *new_state = copy(state);
+                                                               //intercambio de posiciones
+        new_state -> square[x][y] = new_state -> square[new_x][new_y]; //intercambio de los datos espacio vacio con el espacio seleccionado
+        new_state -> square[new_x][new_y] = 0;                         //al espacio seleccionado, se le asigna 0
+        new_state -> x = new_x;                                        //actualizar coordenadas.
+        new_state -> y = new_y;
+
+        return new_state;
+    }
     
+    return NULL;
 }
+
 
 // Obtener los nodos adyacentes del estado actual
 List* get_adyacent_node(State* state)
@@ -74,6 +91,8 @@ List* get_adyacent_node(State* state)
             newNode -> state = *new_state;                 //asignar el nuevo estado a un nodo.
             newNode -> coste = distancia_L1(new_state);    //asignar el coste del nodo.
             list_pushBack(adyacent_node, newNode);
+
+            free(new_state);
         }
     }
 
