@@ -51,6 +51,12 @@ void imprimirEstado(const State *estado) {
 }
 
 
+// Funcion para obtener los nuevos estados posibles a partir del estado actual.
+State* transition(State* state, int accion)
+{
+    
+}
+
 // Obtener los nodos adyacentes del estado actual
 List* get_adyacent_node(State* state)
 {
