@@ -54,7 +54,20 @@ void imprimirEstado(const State *estado) {
 // Obtener los nodos adyacentes del estado actual
 List* get_adyacent_node(State* state)
 {
-    
+    List* adyacent_node = createList();  //crear lista de nodos adyacentes;
+    for (int i = 1; i <= 4; i++)
+    {
+        State* new_state = transition(state, i); //llamada a funcion para obtener el nuevo estado
+        if (new_State != NULL)                      //ver que el estado sea valido
+        {
+            Node* newNode = (Node*) malloc(sizeof(Node));  //crear un nodo
+            newNode -> state = *new_state;                 //asignar el nuevo estado a un nodo.
+            newNode -> coste = distancia_L1(new_state);    //asignar el coste del nodo.
+            list_pusBack(adyacent_node, newNode);
+        }
+    }
+
+    return adyacent_node;
 }
 
 int main() {
