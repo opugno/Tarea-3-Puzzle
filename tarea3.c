@@ -51,7 +51,18 @@ void imprimirEstado(const State *estado) {
 }
 
 
-//
+// Copiar el nodo
+State* copy(State* state)
+{
+    if (state == NULL) return NULL;
+
+    State* new_node = (State*) malloc(sizeof(State));
+    if (new_node == NULL) return NULL;
+
+    *new_node = *state;
+    return new_node;
+}
+
 
 // Funcion para obtener los nuevos estados posibles a partir del estado actual.
 State* transition(State* state, int action)
@@ -63,10 +74,9 @@ State* transition(State* state, int action)
 
     if ((new_x >= 0 && new_x < 3) && (new_y >= 0 && new_y < 3)) //si la posición es valida.
     {
-        State* new_state = (State*) malloc(sizeof(State));
-        *new_state = copy(state);
+        State* new_state = copy(state);
                                                                //intercambio de posiciones
-        new_state -> square[x][y] = new_state -> square[new_x][new_y]; //intercambio de los datos espacio vacio con el espacio seleccionado
+        new_state -> square[state -> x][state -> y] = new_state -> square[new_x][new_y]; //intercambio de los datos espacio vacio con el espacio seleccionado
         new_state -> square[new_x][new_y] = 0;                         //al espacio seleccionado, se le asigna 0
         new_state -> x = new_x;                                        //actualizar coordenadas.
         new_state -> y = new_y;
@@ -81,11 +91,11 @@ State* transition(State* state, int action)
 // Obtener los nodos adyacentes del estado actual
 List* get_adyacent_node(State* state)
 {
-    List* adyacent_node = createList();  //crear lista de nodos adyacentes;
+    List* adyacent_node = list_create();  //crear lista de nodos adyacentes
     for (int i = 1; i <= 4; i++)
     {
         State* new_state = transition(state, i); //llamada a funcion para obtener el nuevo estado
-        if (new_State != NULL)                      //ver que el estado sea valido
+        if (new_state != NULL)                      //ver que el estado sea valido
         {
             Node* newNode = (Node*) malloc(sizeof(Node));  //crear un nodo
             newNode -> state = *new_state;                 //asignar el nuevo estado a un nodo.
@@ -98,6 +108,7 @@ List* get_adyacent_node(State* state)
 
     return adyacent_node;
 }
+
 
 int main() {
     // Estado inicial del puzzle
