@@ -51,6 +51,26 @@ void imprimirEstado(const State *estado) {
 }
 
 
+// Ver si es el estado final, ordenado de menor a mayor 1-8 
+int is_final_state(State* state)
+{
+    int final_state[3][3] = {  //asi deberia verse la solucion final
+        {1, 2, 3},
+        {4, 5, 6},
+        {7, 8, 0}   
+    };
+
+    for (int i = 0; i < 3; i++)   //recorrer el puzzle (COMO MATRIZ)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            if (state -> square[i][j] == final_state[i][j]) return 1;  //comparar el cuadrado con la final
+        }
+    }
+    return 0;
+}
+
+
 // Copiar el nodo
 State* copy(State* state)
 {
