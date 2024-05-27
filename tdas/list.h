@@ -2,6 +2,8 @@
 #define LIST_H
 
 typedef struct List List;
+typedef List Stack;
+typedef List Queue;
 
 // Esta función crea una lista vacía y devuelve un puntero a la lista.
 List *list_create();
@@ -39,5 +41,27 @@ void list_sortedInsert(List *L, void *data,
                        int (*lower_than)(void *data1, void *data2));
 
 int list_size(List* L);
+
+//Funciones Stack
+Stack *stack_create();
+
+void stack_push(Stack *stack, void *data) { list_pushFront(stack, data); }
+
+void *stack_top(Stack *stack) { return list_first(stack); }
+
+void *stack_pop(Stack *stack) { return list_popFront(stack); }
+
+void stack_clean(Stack *stack) { list_clean(stack); }
+
+//funciones Cola
+Queue *queue_create(Queue *queue) { return list_create(); }
+
+void queue_insert(Queue *queue, void *data) { list_pushBack(queue, data); }
+
+void *queue_remove(Queue *queue) { return list_popFront(queue); }
+
+void *queue_front(Queue *queue) { return list_first(queue); }
+
+void queue_clean(Queue *queue) { list_clean(queue); }
 
 #endif
