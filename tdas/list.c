@@ -1,10 +1,12 @@
-#include "list.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
+#include "list.h"
 
 typedef struct Node {
   void *data;
   struct Node *next;
+  struct Node* prev;
 } Node;
 
 struct List {
@@ -14,7 +16,9 @@ struct List {
   int size;
 };
 
-typedef List List;
+//typedef List List;
+typedef List Queue;
+typedef List Stack;
 
 List *list_create() {
   List *newList = (List *)malloc(sizeof(List));
@@ -200,3 +204,27 @@ void list_clean(List *L) {
   L->current = NULL;
   L->size = 0;
 }
+
+//stack
+Stack *stack_create(Stack *stack) { return list_create(); }
+
+void stack_push(Stack *stack, void *data) { list_pushFront(stack, data); }
+
+void *stack_top(Stack *stack) { return list_first(stack); }
+
+void *stack_pop(Stack *stack) { return list_popFront(stack); }
+
+void stack_clean(Stack *stack) { list_clean(stack); }
+
+//cola
+typedef List Queue;
+
+Queue *queue_create(Queue *queue) { return list_create(); }
+
+void queue_insert(Queue *queue, void *data) { list_pushBack(queue, data); }
+
+void *queue_remove(Queue *queue) { return list_popFront(queue); }
+
+void *queue_front(Queue *queue) { return list_first(queue); }
+
+void queue_clean(Queue *queue) { list_clean(queue); }
