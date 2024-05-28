@@ -272,7 +272,7 @@ State* DFS(State* initial, int* cont, Set* visited_states)
         State *aux = stack_top(S);                         //obtener el primero
         stack_pop(S);                                      //desapilar
 
-        //printf("\nDFS Iteración %d - Estado actual:\n", *cont);
+        printf("\nDFS Iteración %d - Estado actual:\n", *cont);
         //imprimirEstado(aux);
         
         if (list_size(aux -> actions) >= 15 )           //un maximo de nodos, para que no se vuelva infinito
@@ -312,7 +312,7 @@ State* BFS(State* initial, int* cont, Set* visited_states)
         State *aux_queue = queue_front(queue);  //obtener el primer nodo(estado)
         queue_remove(queue);                          //lo sacamos de la cola   
 
-        //printf("\nBFS Iteración %d - Estado actual:\n", *cont);
+        printf("\nBFS Iteración %d - Estado actual:\n", *cont);
         //imprimirEstado(aux_queue);
         
         if (is_final_state(aux_queue))              //vemos si es el estado final
@@ -379,7 +379,7 @@ int main()
      Set* visited_BFS = set_create(1000);
 
     // Insertar el estado inicial en el conjunto de estados visitados
-    char initial_state_key[10];
+    char initial_state_key[30];
     state_to_string(&estado_inicial, initial_state_key);
     set_insert(visited_DFS, initial_state_key);
     set_insert(visited_BFS, initial_state_key);

@@ -5,13 +5,20 @@ Tiene dos opciones busqueda en profundidad(DFS) o busqueda en anchura(BFS).
 
 ## Funcionalidades
 
-1. **Búsqueda en Profundidad**: Realiza una búsqueda en profundidad para encontrar la solución del puzzle. Sin embargo, actualmente, esta opción puede causar un fallo de segmentación (core dump).
-2. **Búsqueda en Anchura**: Realiza una búsqueda en anchura para encontrar la solución del puzzle. Esta opción puede ejecutar indefinidamente en ciertos casos.
-
+1. **Búsqueda en Profundidad**: Realiza una búsqueda en profundidad para encontrar la solución del puzzle. Sin embargo, actualmente, esta opción actualmente;
+ ```bash
+  "**fallo de segmentación (core dump)**"
+ ```
+3. **Búsqueda en Anchura**: Realiza una búsqueda en anchura para encontrar la solución del puzzle. Esta opción actualmente;
+```bash
+ "**ejecuta indefinidamente**"
+```
 ## Mejoramientos
 
-Optimizar el manejo de memoria para evitar fallos de segmentación en la opción DFS.
+-Optimizar el manejo de memoria para evitar fallos de segmentación en la opción DFS.
+
 -Implementar límites de profundidad y anchura para evitar bucles infinitos.
+
 -Mejorar la interfaz del usuario para facilitar el uso y la comprensión de los errores.
 
 ## Ejecución del Programa
@@ -58,6 +65,23 @@ Distancia L1:14
        Búsqueda en Profundidad 
    ***.~~~¨¨--°°°°°°--¨¨~~~.***
    "Los estados, desde el inicial hasta el final"
+   DFS Iteración 0 - Estado actual:
+
+   Transición (1):
+   x x 8 
+   1 3 4 
+   6 5 7 
+
+   Transición (2):
+   x 8 x 
+   1 3 4 
+   6 5 7 
+
+   Transición (4):
+   x 3 8 
+   1 x 4 
+   6 5 7 
+
    Número de iteraciones para llegar a la solución:
    
 3. Búsqueda en Anchura
@@ -68,4 +92,16 @@ Distancia L1:14
        Búsqueda en Anchura 
    ***.~~~¨¨--°°°°°°--¨¨~~~.***
    "Los estados, desde el inicial hasta el final"
+   BFS Iteración 1 - Estado actual:
+
+   Transición (2):
+   x x 8 
+   1 3 4 
+   6 5 7 
+
+   Transición (4):
+   1 x 8 
+   x 3 4 
+   6 5 7 
+
    Número de iteraciones para llegar a la solución:
