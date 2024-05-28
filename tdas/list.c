@@ -205,6 +205,19 @@ void list_clean(List *L) {
   L->size = 0;
 }
 
+void list_destroy(List* list, void (*freeData)(void*)) {
+    Node* current = list->head;
+    while (current) {
+        Node* next = current->next;
+        if (freeData) {
+            freeData(current->data);
+        }
+        free(current);
+        current = next;
+    }
+    free(list);
+}
+
 //stack
 Stack *stack_create(Stack *stack) { return list_create(); }
 
@@ -215,6 +228,8 @@ void *stack_top(Stack *stack) { return list_first(stack); }
 void *stack_pop(Stack *stack) { return list_popFront(stack); }
 
 void stack_clean(Stack *stack) { list_clean(stack); }
+
+int stack_size(Stack *stack) { return list_size(stack);}
 
 //cola
 typedef List Queue;
@@ -228,3 +243,5 @@ void *queue_remove(Queue *queue) { return list_popFront(queue); }
 void *queue_front(Queue *queue) { return list_first(queue); }
 
 void queue_clean(Queue *queue) { list_clean(queue); }
+
+int queue_size(Queue *queue) { return list_size(queue); }
